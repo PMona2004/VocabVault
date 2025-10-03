@@ -1,0 +1,19 @@
+{
+  "editor.fontSize": 16,
+  "editor.fontFamily": "Fira Code, Cascadia Code, Consolas",
+  "editor.fontLigatures": true,
+  "editor.minimap.enabled": true,
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.port": 3000,
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "material-icon-theme",
+  "html.format.indentInnerHtml": true,
+  "css.validate": true,
+  "javascript.validate.enable": true
+}

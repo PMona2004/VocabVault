@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "ritwickdey.liveserver",
+    "esbenp.prettier-vscode",
+    "ecmel.vscode-html-css",
+    "xabikos.javascriptsnippets",
+    "pkief.material-icon-theme",
+    "oderwat.indent-rainbow",
+    "naumovs.color-highlight"
+  ]
+}

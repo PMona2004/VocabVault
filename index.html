@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VocabVault - Can You Unlock the Secret Word?</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <h1>🗝️ VocabVault</h1>
+          </div>
+          <nav class="nav">
+            <div class="nav-links" id="navLinks">
+              <button class="nav-btn" id="gameBtn">Game</button>
+              <button class="nav-btn" id="profileBtn">Profile</button>
+              <button class="nav-btn admin-only hidden" id="adminBtn">
+                Admin
+              </button>
+              <button class="nav-btn" id="logoutBtn">Logout</button>
+            </div>
+            <div class="user-info" id="userInfo">
+              <span id="usernameDisplay"></span>
+              <span class="role-badge" id="roleBadge"></span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Auth Section -->
+      <section class="auth-section" id="authSection">
+        <div class="auth-container">
+          <div class="auth-card">
+            <h2 class="auth-title">Welcome to VocabVault</h2>
+            <p class="auth-subtitle">Can You Crack the Vault of Words?</p>
+
+            <div class="auth-tabs">
+              <button class="auth-tab active" id="loginTab">Login</button>
+              <button class="auth-tab" id="signupTab">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form" id="loginForm">
+              <div class="form-group">
+                <label class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="loginUsername"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPassword"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn--primary btn--full-width">
+                Login
+              </button>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="auth-form hidden" id="signupForm">
+              <div class="form-group">
+                <label class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="signupUsername"
+                  required
+                />
+                <small class="form-hint"
+                  >At least 5 characters with upper and lower case
+                  letters</small
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="signupPassword"
+                  required
+                />
+                <small class="form-hint"
+                  >At least 5 characters with letters, numbers, and special
+                  chars ($%*@)</small
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label">Role</label>
+                <select class="form-control" id="signupRole">
+                  <option value="player">Player</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn--primary btn--full-width">
+                Sign Up
+              </button>
+            </form>
+
+            <div class="auth-error hidden" id="authError"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Game Section -->
+      <section class="game-section hidden" id="gameSection">
+        <div class="container">
+          <div class="game-header">
+            <h2>Daily Word Challenge</h2>
+            <div class="game-stats">
+              <div class="stat">
+                <span class="stat-value" id="gamesPlayed">0</span>
+                <span class="stat-label">Games Today</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value" id="gamesRemaining">3</span>
+                <span class="stat-label">Remaining</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-container">
+            <div class="game-board" id="gameBoard">
+              <!-- 5x6 grid will be generated by JavaScript -->
+            </div>
+
+            <div class="game-input">
+              <input
+                type="text"
+                class="word-input"
+                id="wordInput"
+                maxlength="5"
+                placeholder="Enter 5-letter word"
+              />
+              <button class="btn btn--primary" id="submitGuess">Submit</button>
+            </div>
+
+            <div class="virtual-keyboard" id="virtualKeyboard">
+              <!-- Virtual keyboard will be generated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="game-actions">
+            <button class="btn btn--secondary" id="newGameBtn">New Game</button>
+            <button class="btn btn--outline" id="viewHistoryBtn">
+              View History
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Profile Section -->
+      <section class="profile-section hidden" id="profileSection">
+        <div class="container">
+          <div class="profile-header">
+            <h2>Player Profile</h2>
+          </div>
+
+          <div class="profile-stats">
+            <div class="stat-card">
+              <h3>Games Played</h3>
+              <span class="stat-number" id="totalGamesPlayed">0</span>
+            </div>
+            <div class="stat-card">
+              <h3>Games Won</h3>
+              <span class="stat-number" id="totalGamesWon">0</span>
+            </div>
+            <div class="stat-card">
+              <h3>Win Rate</h3>
+              <span class="stat-number" id="winRate">0%</span>
+            </div>
+            <div class="stat-card">
+              <h3>Today's Games</h3>
+              <span class="stat-number" id="todayGames">0</span>
+            </div>
+          </div>
+
+          <div class="game-history">
+            <h3>Recent Games</h3>
+            <div class="history-list" id="historyList">
+              <!-- Game history will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Admin Section -->
+      <section class="admin-section hidden" id="adminSection">
+        <div class="container">
+          <div class="admin-header">
+            <h2>Admin Dashboard</h2>
+          </div>
+
+          <div class="admin-stats">
+            <div class="stat-card">
+              <h3>Today's Users</h3>
+              <span class="stat-number" id="todayUsers">0</span>
+            </div>
+            <div class="stat-card">
+              <h3>Correct Guesses</h3>
+              <span class="stat-number" id="todayCorrectGuesses">0</span>
+            </div>
+            <div class="stat-card">
+              <h3>Total Users</h3>
+              <span class="stat-number" id="totalUsers">0</span>
+            </div>
+            <div class="stat-card">
+              <h3>Total Games</h3>
+              <span class="stat-number" id="totalGames">0</span>
+            </div>
+          </div>
+
+          <div class="admin-reports">
+            <div class="report-section">
+              <h3>Daily Report</h3>
+              <div class="report-controls">
+                <input type="date" class="form-control" id="reportDate" />
+                <button class="btn btn--primary" id="generateDailyReport">
+                  Generate
+                </button>
+              </div>
+              <div class="report-content" id="dailyReportContent"></div>
+            </div>
+
+            <div class="report-section">
+              <h3>User Report</h3>
+              <div class="report-controls">
+                <select class="form-control" id="userSelect">
+                  <option value="">Select User</option>
+                </select>
+                <button class="btn btn--primary" id="generateUserReport">
+                  Generate
+                </button>
+              </div>
+              <div class="report-content" id="userReportContent"></div>
+            </div>
+          </div>
+
+          <div class="word-management">
+            <h3>Word Management</h3>
+            <div class="word-list" id="wordList"></div>
+            <div class="add-word-form">
+              <input
+                type="text"
+                class="form-control"
+                id="newWord"
+                placeholder="Add new 5-letter word"
+                maxlength="5"
+              />
+              <button class="btn btn--primary" id="addWordBtn">Add Word</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Game Result Modal -->
+    <div class="modal hidden" id="gameResultModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="resultTitle">Game Complete!</h3>
+        </div>
+        <div class="modal-body">
+          <div class="result-message" id="resultMessage"></div>
+          <div class="result-word" id="resultWord"></div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <span class="result-stat-label">Guesses Used:</span>
+              <span class="result-stat-value" id="guessesUsed">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn--primary" id="playAgainBtn">Play Again</button>
+          <button class="btn btn--secondary" id="closeResultBtn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="toast hidden" id="errorToast">
+      <div class="toast-content">
+        <span class="toast-message" id="toastMessage"></span>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
