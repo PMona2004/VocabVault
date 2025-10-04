@@ -2,6 +2,12 @@
 
 A stunning, contemporary Wordle-style word guessing game with user login, game statistics, and admin dashboard functionality.
 
+## Project click here
+https://vocab-vault-ixnh.vercel.app/
+## Login with- 
+- testuser@example.com / Test123! (as Player)
+- admin@example.com / admin access requires permissions!
+
 ## Project Screenshots
 
 Here are some screenshots:
@@ -27,10 +33,6 @@ Here are some screenshots:
 - **Styling**: CSS Grid, Flexbox, CSS Animations
 - **Authentication**: Supabase Auth
 - **Database**: PostgreSQL with Row Level Security
-
-## Login eg
-
-- testuser@example.com / Test123!
 
 ## Setup Instructions
 
