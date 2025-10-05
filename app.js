@@ -293,7 +293,7 @@ async function login(email, password) {
     // Set user context for RLS
     await supabase.setUserContext(user.id);
 
-    // Fetch profile
+    // Try to fetch profile
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("*")
@@ -301,7 +301,29 @@ async function login(email, password) {
       .single()
       .execute();
 
-    if (profileError) {
+    // If no profile found, create it and fetch again
+    if (profileError && profileError.message === "No rows found") {
+      // Auto-creating the user's profile row
+      const { data: newProfile, error: insertError } = await supabase
+        .from("profiles")
+        .insert([
+          {
+            id: user.id,
+            username: (user.email || email).split("@")[0],
+            role: "player",
+            games_played_today: 0,
+            total_games_won: 0,
+            total_games_played: 0,
+          },
+        ])
+        .execute();
+
+      if (insertError) {
+        return { success: false, error: insertError.message };
+      }
+      currentUser = newProfile && newProfile.length > 0 ? newProfile[0] : null;
+      return { success: true, user: currentUser };
+    } else if (profileError) {
       return { success: false, error: profileError.message };
     }
 
