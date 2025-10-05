@@ -506,7 +506,7 @@ function initializeGameBoard() {
   const gameBoard = document.getElementById("gameBoard");
   gameBoard.innerHTML = "";
 
-  for (let row = 0; row < 6; row++) {
+  for (let row = 0; row < 5; row++) {
     for (let col = 0; col < 5; col++) {
       const tile = document.createElement("div");
       tile.className = "letter-tile";
@@ -610,7 +610,7 @@ async function processGuess(guess) {
     setTimeout(() => {
       showGameResult(true, gameState.guesses.length);
     }, 2000);
-  } else if (gameState.currentRow >= 5) {
+  } else if (gameState.currentRow >= 4) {
     gameState.gameOver = true;
     setTimeout(() => {
       showGameResult(false, gameState.guesses.length);
